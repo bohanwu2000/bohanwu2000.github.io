@@ -8,28 +8,24 @@
     <meta name="description" content="Website of Bohan Wu">
     <meta name="author" content="Bohan Wu">
 
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar">
+<body id="page-top" class="page-home">
 <div id="main-wrapper">
 
-<div id="preloader">
-    <div id="status"><div class="status-mes"></div></div>
-</div>
-
 <div class="columns-block container">
-<div class="four fixedcolumns">
+<aside class="four fixedcolumns sidebar-column">
   <header class="header theiaStickySidebar">
     <div class="profile-img">
-      <img src="img/img-profile.jpg" class="img-responsive profile-circle" alt=""/>
+      <img src="img/img-profile.jpg" class="img-responsive profile-circle" alt="Portrait of Bohan Wu"/>
     </div>
     <div class="content">
       <h4>Bohan Wu</h4>
@@ -42,66 +38,75 @@
             </p>
         </div>
 
-        <a class="button u-full-width" href="index.html">home</a>
-        <a class="button u-full-width" href="papers.html">papers</a>
-        <a class="button u-full-width" href="teaching.html">teaching</a>
+        <nav class="site-nav" aria-label="Primary">
+            <a class="button u-full-width is-active" href="index.html">Home</a>
+            <a class="button u-full-width" href="papers.html">Papers</a>
+            <a class="button u-full-width" href="teaching.html">Teaching</a>
+        </nav>
     </div>
 </header>
-</div>
+</aside>
 
-<div class="nine columns">
+<main class="nine columns content-column">
 <div class="theiaStickySidebar">
 <section class="expertise-wrapper section-wrapper gray-bg">
 <div class="container-fluid">
 
-<p>
-I am a Ph.D. student in <a href="https://stat.columbia.edu/">Statistics</a> at
-<a href="https://www.columbia.edu/">Columbia University</a>, under the supervision of
-<a href="http://www.cs.columbia.edu/~blei/">David Blei</a>.
-Before that, I received B.S. in Mathematics and Statistics from Rice University, working with
-<a href="https://www.danielrkowal.com/">Daniel Kowal</a>.
-</p>
+<section class="intro-block">
+    <h1>Bohan Wu</h1>
+    <p class="lead">
+        I develop theory and methods for large-scale probabilistic inference, with a focus on variational inference, empirical Bayes, and causal reasoning with machine learning models.
+    </p>
+    <div class="cta-row">
+        <a class="button button-primary" href="papers.html">Selected Papers</a>
+        <a class="button" href="mailto:bw2766@columbia.edu">Email</a>
+    </div>
+</section>
 
-<p>
-I work on the theory and methods for large-scale probabilistic inference.
-See my <a href="papers.html">papers</a>.
-</p>
+<section class="content-section">
+    <h5>About</h5>
+    <p>
+        I am a Ph.D. student in <a href="https://stat.columbia.edu/">Statistics</a> at
+        <a href="https://www.columbia.edu/">Columbia University</a>, under the supervision of
+        <a href="http://www.cs.columbia.edu/~blei/">David Blei</a>.
+        Before that, I received a B.S. in Mathematics and Statistics from Rice University, where I worked with
+        <a href="https://www.danielrkowal.com/">Daniel Kowal</a>.
+    </p>
+    <p>
+        My work studies the theory and computation behind modern probabilistic inference. See my
+        <a href="papers.html">papers</a> for recent projects and preprints.
+    </p>
+    <ul class="research-list">
+        <li>Variational inference and optimal transport</li>
+        <li>Scalable and generalized empirical Bayes</li>
+        <li>Reliable causal inference from machine learning models</li>
+    </ul>
+</section>
 
-<p>
-My recent interests include:
-</p>
-
-<ul>
-    <li>variational inference and optimal transport;</li>
-    <li>scaling and generalizing empirical Bayes;</li>
-    <li>reliable causal inference from machine learning models.</li>
-</ul>
-
-<!-- ===================== NEWS SECTION ===================== -->
-<hr style="margin: 1.2em 0;">
-
-<h5>News</h5>
-<ul>
-    <li>
-        Gave a talk about empirical Bayes at the Bayes Reading Group, Flatiron Institute (May 2026).
-    </li>
-    <li>
-        Received the <a href="https://bayesian.org/project/new-researchers-travel-award/">ISBA Junior Travel Award</a> to attend the 2026 ISBA World Meeting in Nagoya. Thank you, ISBA!
-    </li>
-    <li>
-        Gave a talk at the Online Monte Carlo Seminar (January 2026). 
-        <a href="https://youtu.be/7SVhM9lGZBM?si=53KhsBxdlRGq9gCt">Video</a>.
-    </li>
-</ul>
-<!-- ========================================================= -->
+<section class="content-section">
+    <h5>News</h5>
+    <ul class="news-list">
+        <li>
+            <span class="news-date">May 2026</span>
+            <span>Gave a talk about empirical Bayes at the Bayes Reading Group, Flatiron Institute.</span>
+        </li>
+        <li>
+            <span class="news-date">2026</span>
+            <span>Received the <a href="https://bayesian.org/project/new-researchers-travel-award/">ISBA Junior Travel Award</a> to attend the 2026 ISBA World Meeting in Nagoya.</span>
+        </li>
+        <li>
+            <span class="news-date">Jan. 2026</span>
+            <span>Gave a talk at the Online Monte Carlo Seminar. <a href="https://youtu.be/7SVhM9lGZBM?si=53KhsBxdlRGq9gCt">Video</a>.</span>
+        </li>
+    </ul>
+</section>
 
 </div>
 </section>
 </div>
-</div>
+</main>
 </div>
 
-<div class="row" style="padding-bottom: 35%"></div>
 </div>
 
 <script src="js/jquery-2.1.4.min.js"></script>

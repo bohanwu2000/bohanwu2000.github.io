@@ -4,56 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bohan Wu</title>
     <meta name="description" content="Website of Bohan Wu">
     <meta name="author" content="Bohan Wu">
 
-    <!-- Favicon
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
 
-    <!-- FONT
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-    <!-- font-awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Style CSS -->
-    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar">
+<body id="page-top" class="page-teaching">
 <div id="main-wrapper">
-<!-- Page Preloader -->
-<div id="preloader">
-    <div id="status">
-        <div class="status-mes"></div>
-    </div>
-</div>
 
 <div class="columns-block container">
-<div class="four fixedcolumns">
+<aside class="four fixedcolumns sidebar-column">
   <header class="header theiaStickySidebar">
     <div class="profile-img">
-      <img src="img/img-profile.jpg" class="img-responsive profile-circle" alt=""/>
+      <img src="img/img-profile.jpg" class="img-responsive profile-circle" alt="Portrait of Bohan Wu"/>
     </div>
     <div class="content">
       <h4>Bohan Wu</h4>
-            <!-- <span class="lead">PhD student</span> -->
 
             <div class="about-text">
                 <p>
@@ -61,28 +35,31 @@
                     Columbia University<br>
                     <a href="mailto:bw2766@columbia.edu">bw2766@columbia.edu</a>
                 </p>
-                <p></p>
+            </div>
 
-            <a class="button u-full-width" href="index.html">home</a>
-            <a class="button u-full-width" href="papers.html">papers</a>
-            <a class="button u-full-width" href="teaching.html">teaching</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a class="button u-full-width" href="index.html">Home</a>
+                <a class="button u-full-width" href="papers.html">Papers</a>
+                <a class="button u-full-width is-active" href="teaching.html">Teaching</a>
+            </nav>
+    </div>
 
     </header>
-    <!-- .header-->
-</div>
-<!-- .left-col-block -->
+</aside>
 
 
-<div class="nine columns">
+<main class="nine columns content-column">
 <div class="theiaStickySidebar">
 <section class="expertise-wrapper section-wrapper gray-bg">
     <div class="container-fluid">
 
-        <div class="row">
-            <div class="col-md-12">
-                <h5>Teaching</h5>
-                <p>I was a teaching assistant for the following courses:</p>
-                <ul>
+        <section class="intro-block compact">
+            <h1>Teaching</h1>
+            <p class="lead">Courses where I have served as a teaching assistant at Columbia University.</p>
+        </section>
+
+        <section class="content-section">
+                <ul class="teaching-list">
                     <li>
                         <strong>Fall 2025.</strong>
                         <a href="https://www.cs.columbia.edu/~blei/fogm/2025F/index.html">
@@ -126,26 +103,17 @@
                         </a>
                     </li>
                 </ul>
-            </div>
-        </div>
-
-        <div class="row" style="padding-bottom: 50%"></div>
+        </section>
 
     </div>
 </section>
 </div>
+</main>
 </div>
-<!-- .right-col-block -->
 </div>
-<!-- .columns-block -->
-<div class="row" style="padding-bottom: 25%"> </div>
-</div>
-<!-- #main-wrapper -->
 
-<!-- jquery -->
 <script src="js/jquery-2.1.4.min.js"></script>
 
-<!-- Bootstrap -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/theia-sticky-sidebar.js"></script>
 <script src="js/scripts.js"></script>

@@ -9,28 +9,24 @@
     <meta name="description" content="Website of Bohan Wu">
     <meta name="author" content="Bohan Wu">
 
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
-
-    <script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body id="page-top">
+<body id="page-top" class="page-papers">
 <div id="main-wrapper">
 
   <div class="columns-block container">
-  <div class="four fixedcolumns">
+  <aside class="four fixedcolumns sidebar-column">
     <header class="header theiaStickySidebar">
       <div class="profile-img">
-        <img src="img/img-profile.jpg" class="img-responsive profile-circle" alt=""/>
+        <img src="img/img-profile.jpg" class="img-responsive profile-circle" alt="Portrait of Bohan Wu"/>
       </div>
       <div class="content">
         <h4>Bohan Wu</h4>
@@ -42,21 +38,30 @@
                 </p>
             </div>
 
-            <a class="button u-full-width" href="index.html">home</a>
-            <a class="button u-full-width" href="papers.html">papers</a>
-            <a class="button u-full-width" href="teaching.html">teaching</a>
+            <nav class="site-nav" aria-label="Primary">
+                <a class="button u-full-width" href="index.html">Home</a>
+                <a class="button u-full-width is-active" href="papers.html">Papers</a>
+                <a class="button u-full-width" href="teaching.html">Teaching</a>
+            </nav>
+      </div>
     </header>
-</div>
+</aside>
 
-<div class="nine columns">
+<main class="nine columns content-column">
 <div class="theiaStickySidebar">
 <section class="expertise-wrapper section-wrapper gray-bg">
 <div class="container-fluid">
-<!-- ===================== -->
-<!-- Preprints -->
-<!-- ===================== -->
-<h5><b>Preprints</b></h5>
-<ul>
+
+<section class="intro-block compact">
+    <h1>Papers</h1>
+    <p class="lead">
+        Preprints and publications on probabilistic inference, empirical Bayes, variational methods, and causal machine learning.
+    </p>
+</section>
+
+<section class="content-section">
+<h5>Preprints</h5>
+<ul class="publication-list">
 <li>
     B. Wu, S. Salazar, D. P. Green, and D. M. Blei.<br />
     <b>The Illusion of Learning from Observational Data: An Empirical Bayes Perspective</b><br />
@@ -101,8 +106,8 @@
 
 
     <li>
-        S. Sheng, B. Wu, and A. González Sanz. and M.Nutz<br />
-        <b>Stability of Mean-Field Variational Inferenc </b><br />
+        S. Sheng, B. Wu, A. González Sanz, and M. Nutz<br />
+        <b>Stability of Mean-Field Variational Inference</b><br />
         <em>arXiv preprint</em>, 2025.
         <br />
         <a class="button button-inline" href="https://arxiv.org/pdf/2506.07856">arXiv</a>
@@ -116,12 +121,11 @@
         <a class="button button-inline" href="https://arxiv.org/abs/2110.12316">arXiv</a>
     </li>
 </ul>
+</section>
 
-<!-- ===================== -->
-<!-- Publications -->
-<!-- ===================== -->
-<h5><b>Publications</b></h5>
-<ul>
+<section class="content-section">
+<h5>Publications</h5>
+<ul class="publication-list">
     
     <li>
         B. Wu<span style="font-size:1.15em; font-weight:700;">*</span>, E. N. Weinstein<span style="font-size:1.15em; font-weight:700;">*</span>, Y. Wang, and D. Blei.<br />
@@ -169,14 +173,15 @@
         <a class="button button-inline" href="https://arxiv.org/pdf/2106.09114">pdf</a>
     </li>
 </ul>
+</section>
 
 </div>
 </section>
 </div>
-</div>
+</main>
 </div>
 
-<div class="row" style="padding-bottom: 25%"></div>
+</div>
 
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
