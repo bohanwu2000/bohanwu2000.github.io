@@ -726,16 +726,16 @@ a:focus {
 }
 
 .profile-img .profile-circle {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 780 / 1130;
     background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 50%;
+    border-radius: 8px;
     box-shadow: 0 18px 44px rgba(23, 32, 51, 0.12);
     display: block;
-    height: 188px;
+    height: auto;
     margin: 0;
     max-width: none;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center center;
     width: 188px;
 }
@@ -997,7 +997,7 @@ input[type="button"]:focus {
     }
 
     .profile-img .profile-circle {
-        height: 124px;
+        height: auto;
         width: 124px;
     }
 
@@ -1031,7 +1031,7 @@ input[type="button"]:focus {
     }
 
     .profile-img .profile-circle {
-        height: 96px;
+        height: auto;
         margin: 0 auto;
         width: 96px;
     }
