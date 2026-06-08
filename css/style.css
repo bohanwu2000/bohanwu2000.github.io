@@ -737,7 +737,12 @@ a:focus {
     max-width: none;
     object-fit: cover;
     object-position: center center;
+    transform: scale(1.08);
     width: 188px;
+}
+
+.profile-img {
+    overflow: hidden;
 }
 
 .header .content h4 {
