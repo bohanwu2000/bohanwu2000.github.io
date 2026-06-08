@@ -730,6 +730,7 @@ a:focus {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 50%;
+    box-sizing: border-box;
     box-shadow: 0 18px 44px rgba(23, 32, 51, 0.12);
     display: block;
     height: 176px;
@@ -737,6 +738,7 @@ a:focus {
     max-width: none;
     object-fit: contain;
     object-position: center center;
+    padding: 12px;
     width: 176px;
 }
 
@@ -890,6 +892,12 @@ input[type="button"]:focus {
 
 .content-section:last-child {
     margin-bottom: 0;
+}
+
+.section-heading {
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 20px;
 }
 
 .research-list,
