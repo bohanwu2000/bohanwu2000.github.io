@@ -726,23 +726,22 @@ a:focus {
 }
 
 .profile-img .profile-circle {
-    aspect-ratio: 780 / 1130;
+    aspect-ratio: 1 / 1;
     background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 50%;
     box-shadow: 0 18px 44px rgba(23, 32, 51, 0.12);
     display: block;
-    height: auto;
+    height: 188px;
     margin: 0;
     max-width: none;
     object-fit: cover;
-    object-position: center center;
-    transform: scale(1.08);
+    object-position: center 28%;
     width: 188px;
 }
 
 .profile-img {
-    overflow: hidden;
+    overflow: visible;
 }
 
 .header .content h4 {
@@ -1002,7 +1001,7 @@ input[type="button"]:focus {
     }
 
     .profile-img .profile-circle {
-        height: auto;
+        height: 124px;
         width: 124px;
     }
 
@@ -1036,7 +1035,7 @@ input[type="button"]:focus {
     }
 
     .profile-img .profile-circle {
-        height: auto;
+        height: 96px;
         margin: 0 auto;
         width: 96px;
     }
