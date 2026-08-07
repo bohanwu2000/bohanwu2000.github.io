@@ -588,16 +588,19 @@ button:focus,
 
 /* Site refresh */
 :root {
-    --ink: #172033;
-    --text: #344154;
-    --muted: #687386;
-    --line: #dce3ec;
-    --paper: #ffffff;
-    --background: #f7f8fb;
-    --accent: #0f766e;
-    --accent-strong: #0a5d57;
-    --accent-warm: #b85c38;
-    --link: #1c5fa8;
+    --ink: #182234;
+    --text: #3a4658;
+    --muted: #687384;
+    --line: #d9e0e7;
+    --paper: #fffdf8;
+    --paper-soft: #f6f1e8;
+    --background: #eef3f1;
+    --accent: #456f68;
+    --accent-strong: #2f5852;
+    --accent-warm: #9b5142;
+    --link: #245f92;
+    --link-hover: #163f65;
+    --gold: #c58b33;
 }
 
 html {
@@ -606,7 +609,8 @@ html {
 
 body {
     color: var(--text);
-    background: var(--background);
+    background:
+        linear-gradient(180deg, #f7faf8 0%, var(--background) 46%, #e7eee9 100%);
     font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -615,7 +619,7 @@ body {
 }
 
 body::before {
-    background: linear-gradient(90deg, var(--accent), var(--accent-warm), var(--link));
+    background: linear-gradient(90deg, var(--accent-strong), var(--gold), var(--accent-warm), var(--link));
     content: "";
     height: 6px;
     left: 0;
@@ -674,7 +678,7 @@ a {
 
 a:hover,
 a:focus {
-    color: var(--accent-strong);
+    color: var(--link-hover);
     text-decoration: underline;
 }
 
@@ -728,9 +732,9 @@ a:focus {
 .profile-img .profile-circle {
     aspect-ratio: 1 / 1;
     background: var(--paper);
-    border: 1px solid var(--line);
+    border: 1px solid #cfd9de;
     border-radius: 50%;
-    box-shadow: 0 18px 44px rgba(23, 32, 51, 0.12);
+    box-shadow: 0 18px 44px rgba(24, 34, 52, 0.14);
     display: block;
     height: 188px;
     margin: 0;
@@ -788,7 +792,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
     align-items: center;
-    background: var(--paper);
+    background: rgba(255, 253, 248, 0.88);
     border: 1px solid var(--line);
     border-radius: 6px;
     color: var(--ink);
@@ -816,6 +820,7 @@ input[type="reset"]:hover,
 input[type="reset"]:focus,
 input[type="button"]:hover,
 input[type="button"]:focus {
+    background: #ffffff;
     border-color: var(--accent);
     color: var(--accent-strong);
     text-decoration: none;
@@ -823,8 +828,8 @@ input[type="button"]:focus {
 
 .button.is-active,
 .button.button-primary {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
     color: #ffffff;
 }
 
@@ -832,8 +837,8 @@ input[type="button"]:focus {
 .button.is-active:focus,
 .button.button-primary:hover,
 .button.button-primary:focus {
-    background: var(--accent-strong);
-    border-color: var(--accent-strong);
+    background: #244843;
+    border-color: #244843;
     color: #ffffff;
 }
 
@@ -874,7 +879,7 @@ input[type="button"]:focus {
 }
 
 .lead {
-    color: #2f3d4f;
+    color: #2d3a4b;
     font-size: 20px;
     line-height: 1.55;
     margin-bottom: 0;
@@ -925,7 +930,7 @@ input[type="button"]:focus {
 }
 
 .research-list li::before {
-    background: var(--accent-warm);
+    background: var(--gold);
     border-radius: 50%;
     content: "";
     height: 7px;
@@ -953,7 +958,7 @@ input[type="button"]:focus {
 
 .news-date,
 .teaching-list strong {
-    color: var(--ink);
+    color: var(--accent-strong);
     font-size: 13px;
     font-weight: 700;
 }
