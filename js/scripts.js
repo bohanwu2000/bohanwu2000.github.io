@@ -46,7 +46,7 @@ jQuery(function ($) {
 
     function particleCount() {
         var area = window.innerWidth * window.innerHeight;
-        return Math.max(34, Math.min(88, Math.round(area / 18000)));
+        return Math.max(24, Math.min(58, Math.round(area / 26000)));
     }
 
     function makeParticle(index) {
@@ -58,7 +58,11 @@ jQuery(function ($) {
             y: Math.random() * window.innerHeight,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed,
-            radius: 1.1 + Math.random() * 1.9,
+            radius: 8 + Math.random() * 6,
+            rotation: Math.random() * Math.PI * 2,
+            spin: (Math.random() - 0.5) * 0.004,
+            phase: Math.random() * Math.PI * 2,
+            squash: 0.84 + Math.random() * 0.22,
             color: colors[index % colors.length]
         };
     }
@@ -99,6 +103,64 @@ jQuery(function ($) {
         }
     }
 
+    function drawMobius(particle) {
+        var scale = particle.radius;
+        var twist = particle.rotation;
+        var squeeze = particle.squash + Math.sin(particle.phase) * 0.08;
+        var steps = 54;
+
+        context.save();
+        context.translate(particle.x, particle.y);
+        context.rotate(twist);
+        context.scale(1 + (1 - squeeze) * 0.22, squeeze);
+        context.lineCap = 'round';
+        context.lineJoin = 'round';
+        context.shadowColor = 'rgba(36, 106, 165, 0.12)';
+        context.shadowBlur = 7;
+        context.lineWidth = Math.max(2.2, scale * 0.22);
+        context.strokeStyle = particle.color;
+        context.fillStyle = particle.color.replace(/[\d.]+\)$/, '0.11)');
+
+        context.beginPath();
+        for (var i = 0; i <= steps; i += 1) {
+            var t = i / steps * Math.PI * 2;
+            var x = Math.cos(t) * scale * 1.18;
+            var y = Math.sin(t * 2) * scale * 0.36 + Math.sin(t) * scale * 0.15;
+
+            if (i === 0) {
+                context.moveTo(x, y);
+            } else {
+                context.lineTo(x, y);
+            }
+        }
+        context.closePath();
+        context.fill();
+        context.stroke();
+
+        context.shadowBlur = 0;
+        context.lineWidth = Math.max(1.1, scale * 0.11);
+        context.beginPath();
+        for (var j = 0; j <= steps; j += 1) {
+            var u = j / steps * Math.PI * 2;
+            var ix = Math.cos(u) * scale * 0.58;
+            var iy = Math.sin(u * 2 + Math.PI) * scale * 0.18 + Math.sin(u) * scale * 0.08;
+
+            if (j === 0) {
+                context.moveTo(ix, iy);
+            } else {
+                context.lineTo(ix, iy);
+            }
+        }
+        context.strokeStyle = particle.color.replace(/[\d.]+\)$/, '0.22)');
+        context.stroke();
+
+        context.beginPath();
+        context.fillStyle = 'rgba(255, 255, 255, 0.34)';
+        context.ellipse(-scale * 0.34, -scale * 0.17, scale * 0.18, scale * 0.07, -0.25, 0, Math.PI * 2);
+        context.fill();
+        context.restore();
+    }
+
     function drawConnections() {
         for (var i = 0; i < particles.length; i += 1) {
             for (var j = i + 1; j < particles.length; j += 1) {
@@ -125,10 +187,9 @@ jQuery(function ($) {
 
         particles.forEach(function (particle) {
             moveParticle(particle);
-            context.beginPath();
-            context.fillStyle = particle.color;
-            context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            context.fill();
+            particle.rotation += particle.spin;
+            particle.phase += 0.018;
+            drawMobius(particle);
         });
 
         drawConnections();
