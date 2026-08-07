@@ -35,9 +35,9 @@ jQuery(function ($) {
     var animationFrame = null;
     var pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     var colors = [
-        'rgba(47, 89, 84, 0.48)',
-        'rgba(36, 93, 143, 0.38)',
-        'rgba(188, 135, 52, 0.42)'
+        'rgba(47, 102, 149, 0.42)',
+        'rgba(79, 134, 184, 0.34)',
+        'rgba(117, 169, 207, 0.38)'
     ];
 
     canvas.className = 'particle-field';
@@ -110,7 +110,7 @@ jQuery(function ($) {
 
                 if (distance < 118) {
                     context.beginPath();
-                    context.strokeStyle = 'rgba(47, 89, 84, ' + (0.13 * (1 - distance / 118)).toFixed(3) + ')';
+                    context.strokeStyle = 'rgba(47, 102, 149, ' + (0.12 * (1 - distance / 118)).toFixed(3) + ')';
                     context.lineWidth = 1;
                     context.moveTo(a.x, a.y);
                     context.lineTo(b.x, b.y);
