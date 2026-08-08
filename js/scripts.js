@@ -61,6 +61,7 @@ jQuery(function ($) {
             vy: Math.sin(angle) * speed,
             radius: 3.2 + Math.random() * 4.8,
             phase: Math.random() * Math.PI * 2,
+            impact: 0,
             popped: false,
             popAge: 0,
             color: colors[index % colors.length]
@@ -134,6 +135,7 @@ jQuery(function ($) {
         particle.vy = fresh.vy;
         particle.radius = fresh.radius;
         particle.phase = fresh.phase;
+        particle.impact = 0;
         particle.popped = false;
         particle.popAge = 0;
         particle.color = fresh.color;
@@ -150,6 +152,9 @@ jQuery(function ($) {
 
         var pulse = 1 + Math.sin(particle.phase) * 0.12;
         var radius = particle.radius * pulse;
+        var squash = Math.min(1, particle.impact);
+        var radiusX = radius * (1 + squash * 0.18);
+        var radiusY = radius * (1 - squash * 0.18);
         var glowRadius = radius * 2.7;
         var glow = context.createRadialGradient(
             particle.x,
@@ -171,13 +176,60 @@ jQuery(function ($) {
 
         context.beginPath();
         context.fillStyle = particle.color;
-        context.arc(particle.x, particle.y, radius, 0, Math.PI * 2);
+        context.ellipse(particle.x, particle.y, radiusX, radiusY, 0, 0, Math.PI * 2);
         context.fill();
 
         context.beginPath();
         context.fillStyle = 'rgba(255, 255, 255, 0.62)';
         context.arc(particle.x - radius * 0.28, particle.y - radius * 0.3, Math.max(1, radius * 0.28), 0, Math.PI * 2);
         context.fill();
+        particle.impact *= 0.88;
+    }
+
+    function resolveCollisions() {
+        for (var i = 0; i < particles.length; i += 1) {
+            var a = particles[i];
+            if (a.popped) continue;
+
+            for (var j = i + 1; j < particles.length; j += 1) {
+                var b = particles[j];
+                if (b.popped) continue;
+
+                var dx = b.x - a.x;
+                var dy = b.y - a.y;
+                var distance = Math.sqrt(dx * dx + dy * dy);
+                var minimumDistance = a.radius + b.radius;
+
+                if (distance === 0) {
+                    dx = 0.01;
+                    dy = 0;
+                    distance = 0.01;
+                }
+
+                if (distance < minimumDistance) {
+                    var nx = dx / distance;
+                    var ny = dy / distance;
+                    var overlap = minimumDistance - distance;
+                    var correction = overlap * 0.52;
+
+                    a.x -= nx * correction;
+                    a.y -= ny * correction;
+                    b.x += nx * correction;
+                    b.y += ny * correction;
+
+                    var relativeVelocity = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
+                    if (relativeVelocity < 0) {
+                        var impulse = -relativeVelocity * 0.92;
+                        a.vx -= impulse * nx;
+                        a.vy -= impulse * ny;
+                        b.vx += impulse * nx;
+                        b.vy += impulse * ny;
+                        a.impact = Math.max(a.impact, 0.8);
+                        b.impact = Math.max(b.impact, 0.8);
+                    }
+                }
+            }
+        }
     }
 
     function drawBursts() {
@@ -228,6 +280,11 @@ jQuery(function ($) {
                 moveParticle(particle);
                 particle.phase += 0.014;
             }
+        });
+
+        resolveCollisions();
+
+        particles.forEach(function (particle) {
             drawCuteParticle(particle);
         });
 
