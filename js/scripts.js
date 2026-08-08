@@ -36,9 +36,9 @@ jQuery(function ($) {
     var animationFrame = null;
     var pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     var colors = [
-        'rgba(47, 102, 149, 0.34)',
-        'rgba(79, 134, 184, 0.28)',
-        'rgba(117, 169, 207, 0.32)'
+        'rgba(126, 190, 226, 0.24)',
+        'rgba(154, 211, 238, 0.22)',
+        'rgba(188, 226, 244, 0.28)'
     ];
 
     canvas.className = 'particle-field';
@@ -52,7 +52,7 @@ jQuery(function ($) {
 
     function makeParticle(index) {
         var angle = Math.random() * Math.PI * 2;
-        var speed = 0.12 + Math.random() * 0.24;
+        var speed = 0.035 + Math.random() * 0.075;
 
         return {
             x: Math.random() * window.innerWidth,
@@ -98,8 +98,8 @@ jQuery(function ($) {
             var distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < 130 && distance > 0) {
-                particle.x += dx / distance * 0.18;
-                particle.y += dy / distance * 0.18;
+                particle.x += dx / distance * 0.08;
+                particle.y += dy / distance * 0.08;
             }
         }
     }
@@ -150,7 +150,7 @@ jQuery(function ($) {
             return;
         }
 
-        var pulse = 1 + Math.sin(particle.phase) * 0.12;
+        var pulse = 1 + Math.sin(particle.phase) * 0.06;
         var radius = particle.radius * pulse;
         var squash = Math.min(1, particle.impact);
         var radiusX = radius * (1 + squash * 0.18);
@@ -165,9 +165,9 @@ jQuery(function ($) {
             glowRadius
         );
 
-        glow.addColorStop(0, particle.color.replace(/[\d.]+\)$/, '0.22)'));
-        glow.addColorStop(0.55, particle.color.replace(/[\d.]+\)$/, '0.08)'));
-        glow.addColorStop(1, 'rgba(117, 169, 207, 0)');
+        glow.addColorStop(0, particle.color.replace(/[\d.]+\)$/, '0.14)'));
+        glow.addColorStop(0.55, particle.color.replace(/[\d.]+\)$/, '0.045)'));
+        glow.addColorStop(1, 'rgba(188, 226, 244, 0)');
 
         context.beginPath();
         context.fillStyle = glow;
