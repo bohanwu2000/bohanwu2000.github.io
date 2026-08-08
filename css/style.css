@@ -621,6 +621,11 @@ body {
     min-height: 100vh;
 }
 
+::selection {
+    background: rgba(117, 169, 207, 0.34);
+    color: var(--ink);
+}
+
 body::before {
     background: linear-gradient(90deg, #9dcced, var(--accent), var(--link), var(--link-hover));
     content: "";
@@ -635,7 +640,7 @@ body::before {
 .particle-field {
     height: 100vh;
     inset: 0;
-    opacity: 0.78;
+    opacity: 0.7;
     pointer-events: none;
     position: fixed;
     width: 100vw;
@@ -691,6 +696,7 @@ p {
 a {
     color: var(--link);
     text-decoration: none;
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
 }
 
@@ -700,10 +706,16 @@ a:focus {
     text-decoration: underline;
 }
 
+a:focus-visible,
+.button:focus-visible {
+    outline: 3px solid rgba(117, 169, 207, 0.46);
+    outline-offset: 3px;
+}
+
 .columns-block.container {
     box-shadow: none;
     display: grid;
-    gap: 56px;
+    gap: 48px;
     grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
     margin: 52px auto 72px;
     max-width: 1120px;
@@ -712,11 +724,12 @@ a:focus {
 }
 
 .content-column {
+    backdrop-filter: blur(14px);
     background: rgba(251, 253, 255, 0.78);
     border: 1px solid rgba(207, 222, 235, 0.9);
     border-radius: 8px;
     box-shadow: 0 24px 60px var(--surface-shadow);
-    padding: 42px 48px;
+    padding: 46px 52px;
 }
 
 .columns-block.container::before,
@@ -745,6 +758,7 @@ a:focus {
 }
 
 .header {
+    backdrop-filter: blur(12px);
     background: rgba(251, 253, 255, 0.58);
     border: 1px solid rgba(207, 222, 235, 0.76);
     border-radius: 8px;
@@ -771,7 +785,13 @@ a:focus {
     max-width: none;
     object-fit: cover;
     object-position: center 28%;
+    transition: box-shadow 0.24s ease, transform 0.24s ease;
     width: 188px;
+}
+
+.profile-img .profile-circle:hover {
+    box-shadow: 0 22px 54px rgba(19, 35, 58, 0.18);
+    transform: translateY(-2px);
 }
 
 .profile-img {
@@ -837,6 +857,7 @@ input[type="button"] {
     min-height: 38px;
     padding: 10px 16px;
     text-transform: none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     white-space: normal;
 }
 
@@ -854,6 +875,7 @@ input[type="button"]:focus {
     border-color: var(--accent);
     color: var(--accent-strong);
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 .button.is-active,
@@ -910,6 +932,16 @@ input[type="button"]:focus {
     padding-bottom: 36px;
 }
 
+.intro-block h1::after {
+    background: linear-gradient(90deg, var(--accent), rgba(117, 169, 207, 0));
+    border-radius: 999px;
+    content: "";
+    display: block;
+    height: 3px;
+    margin-top: 16px;
+    width: 72px;
+}
+
 .intro-block.compact {
     margin-bottom: 32px;
     padding-bottom: 28px;
@@ -932,6 +964,7 @@ input[type="button"]:focus {
 
 .content-section {
     margin-bottom: 36px;
+    max-width: 760px;
 }
 
 .content-section:last-child {
@@ -966,6 +999,20 @@ input[type="button"]:focus {
     position: relative;
 }
 
+.research-list li,
+.news-list li,
+.publication-list li,
+.teaching-list li {
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.publication-list li:hover,
+.news-list li:hover,
+.teaching-list li:hover {
+    background: rgba(237, 246, 255, 0.42);
+    border-color: #bcd5e8;
+}
+
 .research-list li::before {
     background: var(--accent);
     border-radius: 50%;
@@ -990,7 +1037,7 @@ input[type="button"]:focus {
     gap: 16px;
     grid-template-columns: 108px minmax(0, 1fr);
     margin: 0;
-    padding: 16px 0;
+    padding: 16px 10px;
 }
 
 .news-list li:last-child,
@@ -1010,16 +1057,21 @@ input[type="button"]:focus {
     border-top: 1px solid var(--line);
     color: var(--muted);
     margin: 0;
-    padding: 20px 0;
+    padding: 22px 10px;
 }
 
 .publication-list b {
     color: var(--ink);
+    display: inline-block;
     font-weight: 700;
+    line-height: 1.38;
+    margin-top: 2px;
 }
 
 .publication-list em {
     color: var(--text);
+    display: inline-block;
+    margin-top: 2px;
 }
 
 .teaching-list a {
@@ -1045,7 +1097,7 @@ input[type="button"]:focus {
     }
 
     .content-column {
-        padding: 34px 32px;
+        padding: 34px 30px;
     }
 
     .header .profile-img {
@@ -1088,7 +1140,7 @@ input[type="button"]:focus {
     }
 
     .content-column {
-        padding: 28px 22px;
+        padding: 28px 20px;
     }
 
     .profile-img .profile-circle {
@@ -1126,5 +1178,12 @@ input[type="button"]:focus {
     .teaching-list li {
         gap: 4px;
         grid-template-columns: 1fr;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .publication-list li {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
