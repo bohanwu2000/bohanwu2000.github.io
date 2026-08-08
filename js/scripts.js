@@ -31,13 +31,14 @@ jQuery(function ($) {
     var canvas = document.createElement('canvas');
     var context = canvas.getContext('2d');
     var particles = [];
+    var bursts = [];
     var pointer = { x: null, y: null };
     var animationFrame = null;
     var pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     var colors = [
-        'rgba(47, 102, 149, 0.42)',
-        'rgba(79, 134, 184, 0.34)',
-        'rgba(117, 169, 207, 0.38)'
+        'rgba(47, 102, 149, 0.34)',
+        'rgba(79, 134, 184, 0.28)',
+        'rgba(117, 169, 207, 0.32)'
     ];
 
     canvas.className = 'particle-field';
@@ -58,11 +59,10 @@ jQuery(function ($) {
             y: Math.random() * window.innerHeight,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed,
-            radius: 8 + Math.random() * 6,
-            rotation: Math.random() * Math.PI * 2,
-            spin: (Math.random() - 0.5) * 0.004,
+            radius: 3.2 + Math.random() * 4.8,
             phase: Math.random() * Math.PI * 2,
-            squash: 0.84 + Math.random() * 0.22,
+            popped: false,
+            popAge: 0,
             color: colors[index % colors.length]
         };
     }
@@ -103,62 +103,100 @@ jQuery(function ($) {
         }
     }
 
-    function drawMobius(particle) {
-        var scale = particle.radius;
-        var twist = particle.rotation;
-        var squeeze = particle.squash + Math.sin(particle.phase) * 0.08;
-        var steps = 54;
-
-        context.save();
-        context.translate(particle.x, particle.y);
-        context.rotate(twist);
-        context.scale(1 + (1 - squeeze) * 0.22, squeeze);
-        context.lineCap = 'round';
-        context.lineJoin = 'round';
-        context.shadowColor = 'rgba(36, 106, 165, 0.12)';
-        context.shadowBlur = 7;
-        context.lineWidth = Math.max(2.2, scale * 0.22);
-        context.strokeStyle = particle.color;
-        context.fillStyle = particle.color.replace(/[\d.]+\)$/, '0.11)');
-
-        context.beginPath();
-        for (var i = 0; i <= steps; i += 1) {
-            var t = i / steps * Math.PI * 2;
-            var x = Math.cos(t) * scale * 1.18;
-            var y = Math.sin(t * 2) * scale * 0.36 + Math.sin(t) * scale * 0.15;
-
-            if (i === 0) {
-                context.moveTo(x, y);
-            } else {
-                context.lineTo(x, y);
-            }
+    function popParticle(particle) {
+        if (particle.popped) {
+            return;
         }
-        context.closePath();
-        context.fill();
-        context.stroke();
 
-        context.shadowBlur = 0;
-        context.lineWidth = Math.max(1.1, scale * 0.11);
-        context.beginPath();
-        for (var j = 0; j <= steps; j += 1) {
-            var u = j / steps * Math.PI * 2;
-            var ix = Math.cos(u) * scale * 0.58;
-            var iy = Math.sin(u * 2 + Math.PI) * scale * 0.18 + Math.sin(u) * scale * 0.08;
+        particle.popped = true;
+        particle.popAge = 0;
 
-            if (j === 0) {
-                context.moveTo(ix, iy);
-            } else {
-                context.lineTo(ix, iy);
-            }
+        for (var i = 0; i < 7; i += 1) {
+            var angle = Math.PI * 2 * i / 7 + Math.random() * 0.35;
+            bursts.push({
+                x: particle.x,
+                y: particle.y,
+                vx: Math.cos(angle) * (0.7 + Math.random() * 0.6),
+                vy: Math.sin(angle) * (0.7 + Math.random() * 0.6),
+                radius: Math.max(1.4, particle.radius * (0.18 + Math.random() * 0.16)),
+                age: 0,
+                life: 28 + Math.random() * 10,
+                color: particle.color
+            });
         }
-        context.strokeStyle = particle.color.replace(/[\d.]+\)$/, '0.22)');
-        context.stroke();
+    }
+
+    function resetParticle(particle) {
+        var fresh = makeParticle(particles.indexOf(particle));
+        particle.x = fresh.x;
+        particle.y = fresh.y;
+        particle.vx = fresh.vx;
+        particle.vy = fresh.vy;
+        particle.radius = fresh.radius;
+        particle.phase = fresh.phase;
+        particle.popped = false;
+        particle.popAge = 0;
+        particle.color = fresh.color;
+    }
+
+    function drawCuteParticle(particle) {
+        if (particle.popped) {
+            particle.popAge += 1;
+            if (particle.popAge > 46) {
+                resetParticle(particle);
+            }
+            return;
+        }
+
+        var pulse = 1 + Math.sin(particle.phase) * 0.12;
+        var radius = particle.radius * pulse;
+        var glowRadius = radius * 2.7;
+        var glow = context.createRadialGradient(
+            particle.x,
+            particle.y,
+            0,
+            particle.x,
+            particle.y,
+            glowRadius
+        );
+
+        glow.addColorStop(0, particle.color.replace(/[\d.]+\)$/, '0.22)'));
+        glow.addColorStop(0.55, particle.color.replace(/[\d.]+\)$/, '0.08)'));
+        glow.addColorStop(1, 'rgba(117, 169, 207, 0)');
 
         context.beginPath();
-        context.fillStyle = 'rgba(255, 255, 255, 0.34)';
-        context.ellipse(-scale * 0.34, -scale * 0.17, scale * 0.18, scale * 0.07, -0.25, 0, Math.PI * 2);
+        context.fillStyle = glow;
+        context.arc(particle.x, particle.y, glowRadius, 0, Math.PI * 2);
         context.fill();
-        context.restore();
+
+        context.beginPath();
+        context.fillStyle = particle.color;
+        context.arc(particle.x, particle.y, radius, 0, Math.PI * 2);
+        context.fill();
+
+        context.beginPath();
+        context.fillStyle = 'rgba(255, 255, 255, 0.62)';
+        context.arc(particle.x - radius * 0.28, particle.y - radius * 0.3, Math.max(1, radius * 0.28), 0, Math.PI * 2);
+        context.fill();
+    }
+
+    function drawBursts() {
+        bursts = bursts.filter(function (burst) {
+            burst.age += 1;
+            burst.x += burst.vx;
+            burst.y += burst.vy;
+            burst.vx *= 0.96;
+            burst.vy *= 0.96;
+
+            var fade = Math.max(0, 1 - burst.age / burst.life);
+
+            context.beginPath();
+            context.fillStyle = burst.color.replace(/[\d.]+\)$/, (0.34 * fade).toFixed(3) + ')');
+            context.arc(burst.x, burst.y, burst.radius * (1 + burst.age / burst.life), 0, Math.PI * 2);
+            context.fill();
+
+            return burst.age < burst.life;
+        });
     }
 
     function drawConnections() {
@@ -186,12 +224,14 @@ jQuery(function ($) {
         context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
         particles.forEach(function (particle) {
-            moveParticle(particle);
-            particle.rotation += particle.spin;
-            particle.phase += 0.018;
-            drawMobius(particle);
+            if (!particle.popped) {
+                moveParticle(particle);
+                particle.phase += 0.014;
+            }
+            drawCuteParticle(particle);
         });
 
+        drawBursts();
         drawConnections();
         animationFrame = window.requestAnimationFrame(draw);
     }
@@ -204,6 +244,30 @@ jQuery(function ($) {
     window.addEventListener('mouseleave', function () {
         pointer.x = null;
         pointer.y = null;
+    });
+    window.addEventListener('click', function (event) {
+        var nearest = null;
+        var nearestDistance = Infinity;
+
+        particles.forEach(function (particle) {
+            if (particle.popped) {
+                return;
+            }
+
+            var dx = particle.x - event.clientX;
+            var dy = particle.y - event.clientY;
+            var distance = Math.sqrt(dx * dx + dy * dy);
+            var hitRadius = Math.max(24, particle.radius * 3.2);
+
+            if (distance < hitRadius && distance < nearestDistance) {
+                nearest = particle;
+                nearestDistance = distance;
+            }
+        });
+
+        if (nearest) {
+            popParticle(nearest);
+        }
     });
     document.addEventListener('visibilitychange', function () {
         if (document.hidden && animationFrame) {
