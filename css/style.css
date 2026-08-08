@@ -615,8 +615,8 @@ body {
         radial-gradient(circle at 88% 12%, rgba(79, 134, 184, 0.16), transparent 28%),
         linear-gradient(180deg, #f8fcff 0%, #eaf5ff 50%, #dcecff 100%);
     font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 500;
     line-height: 1.7;
     min-height: 100vh;
 }
@@ -637,20 +637,6 @@ body::before {
     z-index: 1;
 }
 
-.particle-field {
-    height: 100vh;
-    inset: 0;
-    opacity: 0.62;
-    pointer-events: none;
-    position: fixed;
-    width: 100vw;
-    z-index: 0;
-}
-
-.reduced-motion .particle-field {
-    display: none;
-}
-
 #main-wrapper {
     overflow: visible;
     position: relative;
@@ -668,7 +654,7 @@ h4,
 h5,
 h6 {
     color: var(--ink);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0;
     text-shadow: 0 1px 18px rgba(251, 253, 255, 0.84);
 }
@@ -950,7 +936,8 @@ input[type="button"]:focus {
 
 .lead {
     color: #263d56;
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 600;
     line-height: 1.55;
     margin-bottom: 0;
     max-width: 760px;
@@ -966,6 +953,11 @@ input[type="button"]:focus {
 .content-section {
     margin-bottom: 36px;
     max-width: 760px;
+}
+
+.content-section p,
+.content-section li {
+    font-weight: 500;
 }
 
 .content-section:last-child {
