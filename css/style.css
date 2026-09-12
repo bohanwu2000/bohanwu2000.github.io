@@ -590,7 +590,7 @@ button:focus,
 :root {
     --ink: #13233a;
     --text: #33465f;
-    --muted: #65778d;
+    --muted: #56677a;
     --line: #cfdeeb;
     --paper: #fbfdff;
     --paper-soft: #edf6ff;
@@ -610,10 +610,7 @@ html {
 
 body {
     color: var(--text);
-    background:
-        radial-gradient(circle at 18% 0%, rgba(117, 169, 207, 0.25), transparent 32%),
-        radial-gradient(circle at 88% 12%, rgba(79, 134, 184, 0.16), transparent 28%),
-        linear-gradient(180deg, #f8fcff 0%, #eaf5ff 50%, #dcecff 100%);
+    background: linear-gradient(120deg, #edf5fc 0%, #fafcfe 48%, #f4f8fb 100%);
     font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 18px;
     font-weight: 500;
@@ -627,29 +624,14 @@ body {
 }
 
 body::before {
-    background: linear-gradient(90deg, #9dcced, var(--accent), var(--link), var(--link-hover));
+    background: #a4c8df;
     content: "";
-    height: 6px;
+    height: 3px;
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 1;
-}
-
-.bubble-background {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .bubble-background {
-        display: none;
-    }
 }
 
 #main-wrapper {
@@ -671,7 +653,14 @@ h6 {
     color: var(--ink);
     font-weight: 700;
     letter-spacing: 0;
-    text-shadow: 0 1px 18px rgba(251, 253, 255, 0.84);
+    text-shadow: none;
+}
+
+h1,
+.section-heading,
+.header .content h4 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
 }
 
 h1 {
@@ -693,7 +682,7 @@ h5 {
 
 p {
     margin-bottom: 18px;
-    text-shadow: 0 1px 16px rgba(251, 253, 255, 0.7);
+    text-shadow: none;
 }
 
 a {
@@ -777,20 +766,14 @@ a:focus-visible,
     background: var(--paper);
     border: 1px solid #c7dbe9;
     border-radius: 50%;
-    box-shadow: 0 18px 44px rgba(22, 33, 49, 0.14);
+    box-shadow: 0 0 0 6px #f8fbfe, 0 0 0 7px #d5e4ee;
     display: block;
     height: 188px;
     margin: 0;
     max-width: none;
     object-fit: cover;
     object-position: center 28%;
-    transition: box-shadow 0.24s ease, transform 0.24s ease;
     width: 188px;
-}
-
-.profile-img .profile-circle:hover {
-    box-shadow: 0 22px 54px rgba(19, 35, 58, 0.18);
-    transform: translateY(-2px);
 }
 
 .profile-img {
@@ -798,6 +781,7 @@ a:focus-visible,
 }
 
 .header .content h4 {
+    font-size: 32px;
     margin: 0 0 14px;
 }
 
@@ -820,10 +804,10 @@ a:focus-visible,
 
 .header .content .about-text {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.65;
     margin: 0;
-    text-shadow: 0 1px 16px rgba(251, 253, 255, 0.72);
+    text-shadow: none;
 }
 
 .header .content .about-text p {
@@ -832,7 +816,8 @@ a:focus-visible,
 
 .site-nav {
     display: grid;
-    gap: 10px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
     margin-top: 28px;
 }
 
@@ -842,7 +827,6 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
     align-items: center;
-    backdrop-filter: blur(10px);
     background: rgba(251, 253, 255, 0.48);
     border: 1px solid rgba(207, 222, 235, 0.72);
     border-radius: 6px;
@@ -858,7 +842,7 @@ input[type="button"] {
     min-height: 38px;
     padding: 10px 16px;
     text-transform: none;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     white-space: normal;
 }
 
@@ -876,7 +860,6 @@ input[type="button"]:focus {
     border-color: var(--accent);
     color: var(--accent-strong);
     text-decoration: none;
-    transform: translateY(-1px);
 }
 
 .button.is-active,
@@ -896,7 +879,6 @@ input[type="button"]:focus {
 }
 
 .button-inline {
-    backdrop-filter: blur(8px);
     background: rgba(237, 246, 255, 0.48);
     color: var(--link-hover);
     display: inline-flex;
@@ -910,6 +892,25 @@ input[type="button"]:focus {
 .button-inline:hover,
 .button-inline:focus {
     background: rgba(251, 253, 255, 0.72);
+}
+
+.site-nav .button {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: var(--muted);
+    font-size: 14px;
+    min-height: 44px;
+    padding: 10px 3px;
+}
+
+.site-nav .button:hover,
+.site-nav .button:focus,
+.site-nav .button.is-active {
+    background: transparent;
+    border-bottom-color: var(--accent);
+    color: var(--link-hover);
 }
 
 .gray-bg,
@@ -930,18 +931,12 @@ input[type="button"]:focus {
 
 .intro-block {
     border-bottom: 1px solid var(--line);
-    margin-bottom: 34px;
-    padding-bottom: 36px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
 }
 
 .intro-block h1::after {
-    background: linear-gradient(90deg, var(--accent), rgba(117, 169, 207, 0));
-    border-radius: 999px;
-    content: "";
-    display: block;
-    height: 3px;
-    margin-top: 16px;
-    width: 72px;
+    content: none;
 }
 
 .intro-block.compact {
@@ -966,7 +961,7 @@ input[type="button"]:focus {
 }
 
 .content-section {
-    margin-bottom: 36px;
+    margin-bottom: 44px;
     max-width: 760px;
 }
 
@@ -980,7 +975,7 @@ input[type="button"]:focus {
 }
 
 .section-heading {
-    font-size: 28px;
+    font-size: 30px;
     line-height: 1.2;
     margin-bottom: 20px;
 }
@@ -995,6 +990,7 @@ input[type="button"]:focus {
 }
 
 .research-list {
+    border-left: 2px solid #a4c8df;
     display: grid;
     gap: 10px;
     margin-top: 20px;
@@ -1003,7 +999,7 @@ input[type="button"]:focus {
 .research-list li {
     color: var(--ink);
     margin: 0;
-    padding-left: 22px;
+    padding-left: 18px;
     position: relative;
 }
 
@@ -1012,7 +1008,7 @@ input[type="button"]:focus {
 .publication-list li,
 .teaching-list li {
     border-radius: 6px;
-    text-shadow: 0 1px 16px rgba(251, 253, 255, 0.72);
+    text-shadow: none;
     transition: background 0.18s ease, border-color 0.18s ease;
 }
 
@@ -1024,14 +1020,7 @@ input[type="button"]:focus {
 }
 
 .research-list li::before {
-    background: var(--accent);
-    border-radius: 50%;
-    content: "";
-    height: 7px;
-    left: 0;
-    position: absolute;
-    top: 12px;
-    width: 7px;
+    content: none;
 }
 
 .equal-contribution {
@@ -1047,7 +1036,7 @@ input[type="button"]:focus {
     gap: 16px;
     grid-template-columns: 108px minmax(0, 1fr);
     margin: 0;
-    padding: 16px 10px;
+    padding: 18px 0;
 }
 
 .news-list li:last-child,
@@ -1059,16 +1048,16 @@ input[type="button"]:focus {
 .news-date,
 .teaching-list strong {
     color: var(--accent-strong);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
-    text-shadow: 0 1px 16px rgba(251, 253, 255, 0.74);
+    text-shadow: none;
 }
 
 .publication-list li {
     border-top: 1px solid var(--line);
     color: var(--muted);
     margin: 0;
-    padding: 22px 10px;
+    padding: 26px 0;
 }
 
 .publication-list b {
@@ -1101,7 +1090,7 @@ input[type="button"]:focus {
         border-bottom: 1px solid rgba(207, 222, 235, 0.72);
         display: grid;
         gap: 22px;
-        grid-template-columns: 116px minmax(0, 1fr);
+        grid-template-columns: 124px minmax(0, 1fr);
         padding-bottom: 26px !important;
         position: static;
         text-align: left;
@@ -1136,7 +1125,7 @@ input[type="button"]:focus {
 
 @media (max-width: 560px) {
     body {
-        font-size: 15px;
+        font-size: 17px;
     }
 
     .columns-block.container {
@@ -1146,7 +1135,7 @@ input[type="button"]:focus {
 
     .header {
         display: block;
-        padding: 22px !important;
+        padding: 12px 0 24px !important;
         text-align: center;
     }
 
@@ -1165,11 +1154,11 @@ input[type="button"]:focus {
     }
 
     .header .content h4 {
-        font-size: 24px;
+        font-size: 30px;
     }
 
     .site-nav {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     h1 {
