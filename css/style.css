@@ -816,7 +816,7 @@ a:focus-visible,
 
 .site-nav {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 6px;
     margin-top: 28px;
 }
@@ -1110,7 +1110,6 @@ input[type="button"]:focus {
     }
 
     .site-nav {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
         margin-top: 22px;
     }
 
@@ -1155,10 +1154,6 @@ input[type="button"]:focus {
 
     .header .content h4 {
         font-size: 30px;
-    }
-
-    .site-nav {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     h1 {
